@@ -15,9 +15,10 @@ addpath(genpath('aux_functions'))
 %
 % ************************************************************************
 
-file_magn = '../Data/Insilico/ColoredNoise/dwi_noisy_lvl05_mag.nii'; %path to magnitude image file (either .nii or .nii.gz)
-file_phase = '../Data/Insilico/ColoredNoise/dwi_noisy_lvl05_phase.nii';%path to phase image file (either .nii or .nii.gz)
+file_magn = 'path/to/magnitude_image.nii'; %(either .nii or .nii.gz)
+file_phase = 'path/to/phase_image.nii'; %(either .nii or .nii.gz)
 
+% the algorithm already saves a denoised nifti file on the same folder of input file. 
 I_denoised = denoise_BM4D_PC(file_magn,file_phase);
 
 %%
@@ -32,6 +33,8 @@ I_denoised = denoise_BM4D_PC(file_magn,file_phase);
 %
 % ************************************************************************
 
-file_magn = '../Data/Insilico/ColoredNoise/dwi_noisy_lvl05_mag.nii';%path to magnitude image file (either .nii or .nii.gz)
+file_magn = 'path/to/magnitude_image.nii'; %path to magnitude image file (either .nii or .nii.gz)
+
+% the algorithm already saves a denoised nifti file on the same folder of input file.
 
 I_denoised_magnOnly = denoise_BM4D_PC(file_magn);
