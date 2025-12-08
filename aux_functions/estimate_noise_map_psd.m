@@ -11,31 +11,32 @@ end
 [X, Y, Z, W] = size(I_noisy_orig);
 
 
-I_noisy = reshape(I_noisy_orig,[X*Y*Z W]);
+% ****** PCA decomposition for denoising **********%
 
-[I_noisy, vals, ~] = svd(I_noisy, 'econ');
+I_Noisy = reshape(I_noisy_orig,[X*Y*Z W]);
 
-I_noisy = reshape(I_noisy,[X Y Z W]);
+I_noisy_cov = I_Noisy'*I_Noisy;
 
-% estimate sigma map from last few PCs
+
+[~, ~, v] = svd(I_noisy_cov, 'econ');
+
+
+I_Noisy = I_Noisy*v;
+
+I_Noisy = reshape(I_Noisy,[X Y Z W]);
+
+%% estimate sigma map from last few PCs
 num_of_PCs = 3;
 
 % index of PC - backwards
 idx = W - num_of_PCs +1;
 
-I_noisy = I_noisy(:,:,:,idx:end);
-
-singvals = diag(vals);
-singvals = singvals(idx:end);
+I_noisy_to_est = I_Noisy(:,:,:,idx:end);
 
 
-
-I_noisy_to_est = zeros([size(I_noisy,1:3),num_of_PCs]);
-sigma_map = zeros([size(I_noisy,1:3),num_of_PCs]);
+sigma_map = zeros([size(I_Noisy,1:3),num_of_PCs]);
 
 for i=1:num_of_PCs
-
-    I_noisy_to_est(:,:,:,i) = I_noisy(:,:,:,i).*singvals(i);
 
     template = fspecial3("average",5);
 
@@ -57,7 +58,7 @@ sigma_map(sigma_map<=0)=eps;
 
 % *********** estimate noise PSD, complex-valued data ***********
 
-I_Noisy_to_est_PSD = I_noisy./sigma_map; %normalize
+I_Noisy_to_est_PSD = I_Noisy./sigma_map; %normalize
 
 
 % ** only inside a masked region
@@ -84,9 +85,7 @@ z_size = size(I_Noisy_to_est_PSD,3);
 
 for i=1:num_of_PCs
 
-    I_Noisy_to_est_PSD(:,:,:,i) = (I_Noisy_to_est_PSD(:,:,:,i).*singvals(i));
-
-
+    
     counter = 0;
 
     for start_z=1:step:z_size

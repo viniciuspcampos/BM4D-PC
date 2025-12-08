@@ -85,25 +85,10 @@ end
 %% *** prepare files, perform phase rotation if complex data ****
 fprintf('\n **************************************** \n')
 
-file_dir = dir(file_magn);
-temp_files_folder = 'dwi_temp_files_BM4D';
 
-file_folder = file_dir.folder;
-
-temp_path = fullfile(file_folder,temp_files_folder);
-
-if ~exist(temp_path, 'dir')
-    mkdir(file_folder,temp_files_folder)
-end
-
-dwi_prepareFiles(file_magn,file_phase,temp_files_folder)
+I_noisy = double(dwi_prepareFiles(file_magn,file_phase));
 
 %% ** start the core processing ***
-
-
-files = dir(fullfile(file_folder, temp_files_folder , 'dwi_temp.nii'));
-
-I_noisy = double(niftiread(fullfile(files(1).folder , files(1).name)));
 
 fprintf('Estimating noise Map and noise PSD ...\n')
 
@@ -163,8 +148,8 @@ else %magnitude data
 end
 
 
-%% Save Denoised file and delete temps
-dwi_rebuildFile(file_magn,temp_files_folder,I_denoised)
+%% Save Denoised file 
+dwi_savefile(file_magn,I_denoised)
 
 
 fprintf('\nFinished denoising with BM4D-PC.\n')

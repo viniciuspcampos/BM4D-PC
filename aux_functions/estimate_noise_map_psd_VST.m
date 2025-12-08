@@ -14,6 +14,10 @@ end
 
 I_noisy = reshape(I_noisy_orig,[X*Y*Z W]);
 
+% for this specific case, we use the SVD on the original noisy that,
+% rather than the convariance matrix. Just to get the singular values too.
+% useful for "pre-denoise" on line 66
+
 [I_noisy, vals, v] = svd(I_noisy, 'econ');
 
 I_noisy = reshape(I_noisy,[X Y Z W]);

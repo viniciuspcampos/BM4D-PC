@@ -16,22 +16,25 @@ I_Noisy = riceVST(I_Noisy,1,'A');
 
 % ****** PCA decomposition for denoising **********%
 
-
 I_Noisy = reshape(I_Noisy,[X*Y*Z W]);
 
+I_noisy_cov = I_Noisy'*I_Noisy;
 
-[I_Noisy, vals, v] = svd(I_Noisy, 'econ');
 
+[~, ~, v] = svd(I_noisy_cov, 'econ');
+
+
+I_Noisy = I_Noisy*v;
 
 I_Noisy = reshape(I_Noisy,[X Y Z W]);
 
 
 %% ** adjust psd
 
-glob_PSD = glob_PSD /  (norm(glob_PSD(:),1)/numel(glob_PSD)^2);  % PSD will be normalized,the variances are the inverse of singular values squared
 
+glob_PSD = glob_PSD /  (norm(glob_PSD(:),1)/numel(glob_PSD)^2); % Just enforcing/guaranteeing it is normalized (var = 1)
 
-variances = squeeze(diag(vals).^2);
+variances = ones(1,W); % due to the normalization by Estimated map and VST, variance is one on every PC
 
 %% bm4d profile setup
 BM4D_profile= get_BM4D_profile(profile); %get profile settings
@@ -41,7 +44,7 @@ stage_arg = BM4DProfile.ALL_STAGES;
 
 %% Denoising first Component and getting block-matching
 
-fprintf('Denoising first Component and getting block-matching ...\n')
+fprintf('Denoising first Component and getting block-matching poisitions...\n')
 
 I_PCA_denoised = double(I_Noisy);
 
@@ -49,7 +52,7 @@ i=1;
 
 tic_first_pc = tic;
 
-[I_PCA_denoised(:,:,:,i), match_arrs] = BM4D(10000*I_Noisy(:,:,:,i), (10000^2)*(glob_PSD./variances(i)), BM4D_profile, stage_arg, {true, true});
+[I_PCA_denoised(:,:,:,i), match_arrs] = BM4D(I_Noisy(:,:,:,i), glob_PSD.*variances(i), BM4D_profile, stage_arg, {true, true});
 
 elap_time_first_pc = toc(tic_first_pc);
 
@@ -60,15 +63,13 @@ fprintf('Denoising remaining Components ...\n')
 fprintf('Estimated time to finish = %.2f (sec) ...\n',elap_time_first_pc*(W-1));
 
 for i=2:W
-    [I_PCA_denoised(:,:,:,i)] = BM4D(10000*I_Noisy(:,:,:,i), (10000^2)*(glob_PSD./variances(i)), BM4D_profile, stage_arg, match_arrs);
+    [I_PCA_denoised(:,:,:,i)] = BM4D(I_Noisy(:,:,:,i), glob_PSD.*variances(i), BM4D_profile, stage_arg, match_arrs);
 end
 
-I_PCA_denoised = I_PCA_denoised./10000;
-
-%  'Inverse' SVD
+%%  'Inverse' PCA
 I_PCA_denoised = reshape(I_PCA_denoised,[X*Y*Z W]);
 
-I_PCA_denoised = I_PCA_denoised*vals*v' ;
+I_PCA_denoised = I_PCA_denoised*v' ;
 
 I_PCA_denoised = reshape(I_PCA_denoised,[X Y Z W]);
 
