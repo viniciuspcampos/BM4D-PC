@@ -6,21 +6,7 @@ Implementation of the denoising method **BM4D-PC** [1]
 
 ## Usage:
 
-% Complex-valued data
-file_magn = 'Data/dwi_noisy_lvl05_mag.nii';  % path/to/magnitude_image.nii; %(either .nii or .nii.gz)
-file_phase ='Data/dwi_noisy_lvl05_phase.nii'; % path/to/phase_image.nii; %(either .nii or .nii.gz)
-
-% the algorithm already saves a denoised nifti file on the same folder of input file. 
-I_denoised = denoise_BM4D_PC(file_magn,file_phase);
-
-
-% Magnitude-only data.
-file_magn = 'Data/dwi_noisy_lvl05_mag.nii';  % path/to/magnitude_image.nii; %(either .nii or .nii.gz)
-
-% the algorithm already saves a denoised nifti file on the same folder of input file.
-
-I_denoised_magnOnly = denoise_BM4D_PC(file_magn);
-
+Please check instruction in the [demo file] (demo_denoise_BM4D_PC.m)
 ### Notes:
 
 - BM4D package is required. 
