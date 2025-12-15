@@ -1,23 +1,24 @@
 # BM4D-PC
-Implementation of the denoising method **BM4D-PC** [1]
+*MATLAB* implementation of the denoising method **BM4D-PC** [1]
 
 [1]. Vinicius P. Campos, Diego Szczupak, Tales Santini, Afonso C. Silva, Alessandro Foi, Marcelo A. C. Vieira, and Corey Baron.
 "BM4D-PC: nonlocal volumetric denoising of principal components of diffusion-weighted MR images"
 
-## Usage:
+### Usage:
 
-Please check instruction in the [demo file] (docs/demo_denoise_BM4D_PC.m)
-### Notes:
+Please check instructions in the [demo file](demo_denoise_BM4D_PC.m)
 
-- BM4D package is required. 
- - Please **download** it at https://webpages.tuni.fi/foi/GCF-BM3D  (**version 4.2.5** or newer)
+### Requirements:
+
+- BM4D package is required (MATLAB). 
+ - Please **download** it at [BM4D webpage](https://webpages.tuni.fi/foi/GCF-BM3D)  (**version 4.2.5** or newer)
  - Extract it into *aux_functions* folder.
 	
 ### Feedbacks and issues:
 
 - Please let us know if you run into any issues. 
-- Please direct your questions to vpc24@pitt.edu.
-- Any feedback is much appreciated.
+- Direct your questions to vpc24@pitt.edu.
+- Any feedback is appreciated.
 	
 
 ### Please also cite the following papers:
