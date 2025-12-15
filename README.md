@@ -20,6 +20,7 @@ Please check instructions in the [demo file](demo_denoise_BM4D_PC.m)
 - Direct your questions to vpc24@pitt.edu.
 - Any feedback is appreciated.
 	
+***Python version coming soon!***
 
 ### Please also cite the following papers:
 
