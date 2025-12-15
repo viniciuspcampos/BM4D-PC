@@ -4,6 +4,22 @@ Implementation of the denoising method **BM4D-PC** [1]
 [1]. Vinicius P. Campos, Diego Szczupak, Tales Santini, Afonso C. Silva, Alessandro Foi, Marcelo A. C. Vieira, and Corey Baron.
 "BM4D-PC: nonlocal volumetric denoising of principal components of diffusion-weighted MR images"
 
+## Usage:
+
+% Complex-valued data
+file_magn = 'Data/dwi_noisy_lvl05_mag.nii';  % path/to/magnitude_image.nii; %(either .nii or .nii.gz)
+file_phase ='Data/dwi_noisy_lvl05_phase.nii'; % path/to/phase_image.nii; %(either .nii or .nii.gz)
+
+% the algorithm already saves a denoised nifti file on the same folder of input file. 
+I_denoised = denoise_BM4D_PC(file_magn,file_phase);
+
+
+% Magnitude-only data.
+file_magn = 'Data/dwi_noisy_lvl05_mag.nii';  % path/to/magnitude_image.nii; %(either .nii or .nii.gz)
+
+% the algorithm already saves a denoised nifti file on the same folder of input file.
+
+I_denoised_magnOnly = denoise_BM4D_PC(file_magn);
 
 ### Notes:
 
@@ -13,11 +29,9 @@ Implementation of the denoising method **BM4D-PC** [1]
 	
 ### Feedbacks and issues:
 
-Please let us know if you run into any issues. 
-
-Please direct your questions to vpc24@pitt.edu.
-
-Any feedback is much appreciated.
+- Please let us know if you run into any issues. 
+- Please direct your questions to vpc24@pitt.edu.
+- Any feedback is much appreciated.
 	
 
 ### Please also cite the following papers:
