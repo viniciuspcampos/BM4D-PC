@@ -1,6 +1,23 @@
+# BM4D-PC
 Implementation of the denoising method BM4D-PC [1]
 
 [1]. Vinicius P. Campos, Diego Szczupak, Tales Santini, Afonso C. Silva, Alessandro Foi, Marcelo A. C. Vieira, and Corey Baron.
 "BM4D-PC: nonlocal volumetric denoising of principal components of diffusion-weighted MR images"
 
-Instructions:
+
+Notes:
+
+- BM4D package is required. 
+ - Please **download** it at [Link text]https://webpages.tuni.fi/foi/GCF-BM3D  (**version 4.2.5** or newer)
+ - Extract it into *aux_functions* folder.
+	
+Please let us know if you run into any issues. Please direct your questions to vpc24@pitt.edu.
+
+Any feedback is much appreciated.
+	
+
+Please also cite the following papers:
+
+[2]. Mäkinen, Ymir, Lucio Azzari, and Alessandro Foi. "Collaborative filtering of correlated noise: Exact transform-domain variance for improved shrinkage and patch matching." IEEE Transactions on Image Processing 29 (2020): 8339-8354. [Link text]https://doi.org/10.1109/TIP.2020.3014721
+
+[3]. Maggioni, Matteo, et al. "Nonlocal transform-domain filter for volumetric data denoising and reconstruction." IEEE transactions on image processing 22.1 (2012): 119-133. [Link text]https://doi.org/10.1109/TIP.2012.2210725	

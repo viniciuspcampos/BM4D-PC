@@ -80,6 +80,16 @@ else
     opt.flag_magnitude_only = 0;
 end
 
+%% check if bm4d files exist in the path
+
+if exist('BM4D','file') ~= 2
+    error(['BM4D files were not found.  ' ...
+        '\n\nPlease download it at https://webpages.tuni.fi/foi/GCF-BM3D  (version 4.2.5 or %s)' ...
+        '\nMake sure to extract the zip file into aux_functions.' ...
+        '\n\nCheck Readme for further instructions.'],'newer');
+
+end
+
 
 
 %% *** prepare files, perform phase rotation if complex data ****
