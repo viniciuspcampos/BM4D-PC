@@ -6,7 +6,7 @@ Implementation of the denoising method **BM4D-PC** [1]
 
 ## Usage:
 
-Please check instruction in the [demo file] (demo_denoise_BM4D_PC.m)
+Please check instruction in the [demo file] (docs/demo_denoise_BM4D_PC.m)
 ### Notes:
 
 - BM4D package is required. 
