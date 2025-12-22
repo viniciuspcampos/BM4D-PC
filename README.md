@@ -2,7 +2,7 @@
 *MATLAB* implementation of the denoising method **BM4D-PC** [1]
 
 [1]. Vinicius P. Campos, Diego Szczupak, Tales Santini, Afonso C. Silva, Alessandro Foi, Marcelo A. C. Vieira, and Corey A. Baron.
-"***BM4D-PC: nonlocal volumetric denoising of principal components of diffusion-weighted MR images***"
+"***BM4D-PC: nonlocal volumetric denoising of principal components of diffusion-weighted MR images***" (2025). [Preprint at arXiv](https://doi.org/10.48550/arXiv.2512.17138)
 
 ### Usage:
 
